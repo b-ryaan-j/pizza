@@ -1,0 +1,479 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<title>Pizzería</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ffb347,#ff5f6d);
+}
+
+/* BANNER */
+
+.banner img{
+width:100%;
+height:clamp(200px,30vw,380px);
+object-fit:cover;
+}
+
+/* TITULOS */
+
+h2{
+text-align:center;
+color:white;
+margin-top:30px;
+}
+
+/* PRODUCTOS */
+
+.productos{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+padding:25px;
+}
+
+.card{
+background:white;
+width:240px;
+padding:15px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.precio{
+color:#c62828;
+font-weight:bold;
+}
+
+.contador{
+font-size:14px;
+color:#555;
+}
+
+/* BOTONES */
+
+button{
+background:linear-gradient(90deg,#ff512f,#dd2476);
+border:none;
+color:white;
+padding:8px 18px;
+border-radius:20px;
+cursor:pointer;
+margin-top:10px;
+}
+
+/* FORMULARIO */
+
+.formulario{
+background:white;
+margin:30px auto;
+padding:20px;
+border-radius:12px;
+max-width:500px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+/* ERROR */
+
+.error{
+border:2px solid red;
+background:#ffe6e6;
+animation:shake 0.3s;
+}
+
+@keyframes shake{
+0%{transform:translateX(0)}
+25%{transform:translateX(-5px)}
+50%{transform:translateX(5px)}
+75%{transform:translateX(-5px)}
+100%{transform:translateX(0)}
+}
+
+/* MODALES */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-contenido{
+background:white;
+padding:30px;
+border-radius:12px;
+width:320px;
+text-align:center;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+}
+
+.total{
+font-weight:bold;
+margin-top:10px;
+}
+
+.check{
+font-size:80px;
+color:#4CAF50;
+animation:pop 0.5s ease;
+}
+
+@keyframes pop{
+0%{transform:scale(0)}
+70%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+.ticket{
+text-align:left;
+}
+
+footer{
+background:#8e0e00;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="banner">
+<img src="Banner.png">
+</div>
+
+<h2>🍕 Pizzas</h2>
+
+<div class="productos">
+
+<div class="card">
+<img src="pizza1.jpg">
+<h3>Pepperoni</h3>
+<p class="precio">$120</p>
+<button onclick="agregar('Pepperoni',120,'pepperoni')">Agregar</button>
+<p id="pepperoni" class="contador">En carrito: 0</p>
+</div>
+
+<div class="card">
+<img src="pizza2.jpg">
+<h3>Hawaiana</h3>
+<p class="precio">$130</p>
+<button onclick="agregar('Hawaiana',130,'hawaiana')">Agregar</button>
+<p id="hawaiana" class="contador">En carrito: 0</p>
+</div>
+
+<div class="card">
+<img src="pizza3.jpg">
+<h3>Suprema</h3>
+<p class="precio">$150</p>
+<button onclick="agregar('Suprema',150,'suprema')">Agregar</button>
+<p id="suprema" class="contador">En carrito: 0</p>
+</div>
+
+</div>
+
+<h2>🥤 Refrescos</h2>
+
+<div class="productos">
+
+<div class="card">
+<h3>Coca Cola</h3>
+<p class="precio">$25</p>
+<button onclick="agregar('Coca Cola',25,'coca')">Agregar</button>
+<p id="coca" class="contador">En carrito: 0</p>
+</div>
+
+<div class="card">
+<h3>Sprite</h3>
+<p class="precio">$25</p>
+<button onclick="agregar('Sprite',25,'sprite')">Agregar</button>
+<p id="sprite" class="contador">En carrito: 0</p>
+</div>
+
+</div>
+
+<h2>🍟 Complementos</h2>
+
+<div class="productos">
+
+<div class="card">
+<h3>Papas</h3>
+<p class="precio">$40</p>
+<button onclick="agregar('Papas',40,'papas')">Agregar</button>
+<p id="papas" class="contador">En carrito: 0</p>
+</div>
+
+<div class="card">
+<h3>Alitas</h3>
+<p class="precio">$80</p>
+<button onclick="agregar('Alitas',80,'alitas')">Agregar</button>
+<p id="alitas" class="contador">En carrito: 0</p>
+</div>
+
+</div>
+
+<div class="formulario">
+
+<h2>📋 Datos de entrega</h2>
+
+<input id="nombre" placeholder="Nombre">
+<input id="direccion" placeholder="Dirección">
+<input id="telefono" placeholder="Teléfono">
+
+</div>
+
+<div style="text-align:center;margin:30px;">
+<button onclick="abrirCarrito()">🛒 Ver carrito</button>
+</div>
+
+<!-- MODAL CARRITO -->
+
+<div class="modal" id="modalCarrito">
+<div class="modal-contenido">
+
+<h3>Tu carrito</h3>
+
+<div id="lista"></div>
+
+<p class="total">Total: $<span id="total">0</span></p>
+
+<button onclick="abrirPedido()">Confirmar pedido</button>
+<button onclick="cerrarCarrito()">Cerrar</button>
+
+</div>
+</div>
+
+<!-- MODAL RESUMEN -->
+
+<div class="modal" id="modalPedido">
+<div class="modal-contenido">
+
+<h3>Resumen del pedido</h3>
+
+<div id="resumen"></div>
+
+<p>Total: $<span id="total2">0</span></p>
+
+<button onclick="pagar()">Pagar</button>
+<button onclick="cerrarPedido()">Cancelar</button>
+
+</div>
+</div>
+
+<!-- MODAL EXITO -->
+
+<div class="modal" id="modalExito">
+<div class="modal-contenido">
+
+<div class="check">✔</div>
+
+<h2>¡Pago realizado!</h2>
+
+<p>Tu pedido fue enviado a cocina 🍕</p>
+
+<button onclick="mostrarTicket()">Ver ticket</button>
+
+</div>
+</div>
+
+<!-- MODAL TICKET -->
+
+<div class="modal" id="modalTicket">
+<div class="modal-contenido">
+
+<h3>Ticket de compra</h3>
+
+<div id="ticket" class="ticket"></div>
+
+<button onclick="cerrarTicket()">Cerrar</button>
+
+</div>
+</div>
+
+<footer>
+
+© 2026 Pizzería Deliciosa  
+Desarrollado por Rodrigo Andrade
+
+</footer>
+
+<script>
+
+let carrito=[]
+let total=0
+let contadores={}
+
+function agregar(nombre,precio,id){
+
+carrito.push({nombre,precio})
+total+=precio
+
+if(!contadores[id]) contadores[id]=0
+
+contadores[id]++
+
+document.getElementById(id).innerText="En carrito: "+contadores[id]
+
+}
+
+function abrirCarrito(){
+
+actualizar()
+document.getElementById("modalCarrito").style.display="flex"
+
+}
+
+function cerrarCarrito(){
+document.getElementById("modalCarrito").style.display="none"
+}
+
+function actualizar(){
+
+let lista=document.getElementById("lista")
+lista.innerHTML=""
+
+carrito.forEach((item,i)=>{
+
+lista.innerHTML+=`
+<div class="item">
+${item.nombre} - $${item.precio}
+<button onclick="eliminar(${i})">❌</button>
+</div>
+`
+
+})
+
+document.getElementById("total").innerText=total
+
+}
+
+function eliminar(i){
+
+total-=carrito[i].precio
+carrito.splice(i,1)
+
+actualizar()
+
+}
+
+function abrirPedido(){
+
+let nombre=document.getElementById("nombre")
+let direccion=document.getElementById("direccion")
+let telefono=document.getElementById("telefono")
+
+let valido=true
+
+[nombre,direccion,telefono].forEach(campo=>{
+
+campo.classList.remove("error")
+
+if(campo.value.trim()==""){
+
+campo.classList.add("error")
+valido=false
+
+}
+
+})
+
+if(!valido) return
+
+let resumen=""
+
+carrito.forEach(p=>{
+resumen+=p.nombre+" - $"+p.precio+"<br>"
+})
+
+document.getElementById("resumen").innerHTML=resumen
+document.getElementById("total2").innerText=total
+
+document.getElementById("modalCarrito").style.display="none"
+document.getElementById("modalPedido").style.display="flex"
+
+}
+
+function cerrarPedido(){
+document.getElementById("modalPedido").style.display="none"
+}
+
+function pagar(){
+
+document.getElementById("modalPedido").style.display="none"
+document.getElementById("modalExito").style.display="flex"
+
+}
+
+function mostrarTicket(){
+
+document.getElementById("modalExito").style.display="none"
+
+let fecha=new Date()
+
+let ticket="Pedido<br><br>"
+
+carrito.forEach(p=>{
+ticket+=p.nombre+" - $"+p.precio+"<br>"
+})
+
+ticket+="<br>Total: $"+total
+ticket+="<br><br>Fecha: "+fecha.toLocaleString()
+
+document.getElementById("ticket").innerHTML=ticket
+
+document.getElementById("modalTicket").style.display="flex"
+
+}
+
+function cerrarTicket(){
+document.getElementById("modalTicket").style.display="none"
+}
+
+</script>
+
+</body>
+</html>
+```
