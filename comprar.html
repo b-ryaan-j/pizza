@@ -111,6 +111,12 @@ background:#ffe6e6;
 animation:shake 0.3s;
 }
 
+.mensaje-error{
+color:red;
+font-size:14px;
+display:none;
+}
+
 @keyframes shake{
 0%{transform:translateX(0)}
 25%{transform:translateX(-5px)}
@@ -215,53 +221,18 @@ margin-top:40px;
 
 </div>
 
-<h2>🥤 Refrescos</h2>
-
-<div class="productos">
-
-<div class="card">
-<h3>Coca Cola</h3>
-<p class="precio">$25</p>
-<button onclick="agregar('Coca Cola',25,'coca')">Agregar</button>
-<p id="coca" class="contador">En carrito: 0</p>
-</div>
-
-<div class="card">
-<h3>Sprite</h3>
-<p class="precio">$25</p>
-<button onclick="agregar('Sprite',25,'sprite')">Agregar</button>
-<p id="sprite" class="contador">En carrito: 0</p>
-</div>
-
-</div>
-
-<h2>🍟 Complementos</h2>
-
-<div class="productos">
-
-<div class="card">
-<h3>Papas</h3>
-<p class="precio">$40</p>
-<button onclick="agregar('Papas',40,'papas')">Agregar</button>
-<p id="papas" class="contador">En carrito: 0</p>
-</div>
-
-<div class="card">
-<h3>Alitas</h3>
-<p class="precio">$80</p>
-<button onclick="agregar('Alitas',80,'alitas')">Agregar</button>
-<p id="alitas" class="contador">En carrito: 0</p>
-</div>
-
-</div>
-
 <div class="formulario">
 
 <h2>📋 Datos de entrega</h2>
 
 <input id="nombre" placeholder="Nombre">
+<p id="errorNombre" class="mensaje-error">⚠ Este campo es obligatorio</p>
+
 <input id="direccion" placeholder="Dirección">
+<p id="errorDireccion" class="mensaje-error">⚠ Este campo es obligatorio</p>
+
 <input id="telefono" placeholder="Teléfono">
+<p id="errorTelefono" class="mensaje-error">⚠ Este campo es obligatorio</p>
 
 </div>
 
@@ -279,6 +250,8 @@ margin-top:40px;
 <div id="lista"></div>
 
 <p class="total">Total: $<span id="total">0</span></p>
+
+<p id="errorCarrito" class="mensaje-error">⚠ Agrega productos al carrito</p>
 
 <button onclick="abrirPedido()">Confirmar pedido</button>
 <button onclick="cerrarCarrito()">Cerrar</button>
@@ -312,8 +285,6 @@ margin-top:40px;
 
 <h2>¡Pago realizado!</h2>
 
-<p>Tu pedido fue enviado a cocina 🍕</p>
-
 <button onclick="mostrarTicket()">Ver ticket</button>
 
 </div>
@@ -324,9 +295,9 @@ margin-top:40px;
 <div class="modal" id="modalTicket">
 <div class="modal-contenido">
 
-<h3>Ticket de compra</h3>
+<h3>Ticket</h3>
 
-<div id="ticket" class="ticket"></div>
+<div id="ticket"></div>
 
 <button onclick="cerrarTicket()">Cerrar</button>
 
@@ -334,10 +305,8 @@ margin-top:40px;
 </div>
 
 <footer>
-
-© 2026 Pizzería Deliciosa  
+© 2026 Pizzería  
 Desarrollado por Rodrigo Andrade
-
 </footer>
 
 <script>
@@ -352,7 +321,6 @@ carrito.push({nombre,precio})
 total+=precio
 
 if(!contadores[id]) contadores[id]=0
-
 contadores[id]++
 
 document.getElementById(id).innerText="En carrito: "+contadores[id]
@@ -360,10 +328,8 @@ document.getElementById(id).innerText="En carrito: "+contadores[id]
 }
 
 function abrirCarrito(){
-
 actualizar()
 document.getElementById("modalCarrito").style.display="flex"
-
 }
 
 function cerrarCarrito(){
@@ -376,14 +342,11 @@ let lista=document.getElementById("lista")
 lista.innerHTML=""
 
 carrito.forEach((item,i)=>{
-
 lista.innerHTML+=`
 <div class="item">
 ${item.nombre} - $${item.precio}
 <button onclick="eliminar(${i})">❌</button>
-</div>
-`
-
+</div>`
 })
 
 document.getElementById("total").innerText=total
@@ -391,12 +354,9 @@ document.getElementById("total").innerText=total
 }
 
 function eliminar(i){
-
 total-=carrito[i].precio
 carrito.splice(i,1)
-
 actualizar()
-
 }
 
 function abrirPedido(){
@@ -407,18 +367,31 @@ let telefono=document.getElementById("telefono")
 
 let valido=true
 
-[nombre,direccion,telefono].forEach(campo=>{
+// limpiar errores
+document.querySelectorAll(".mensaje-error").forEach(e=>e.style.display="none")
 
-campo.classList.remove("error")
-
-if(campo.value.trim()==""){
-
-campo.classList.add("error")
-valido=false
-
+if(carrito.length===0){
+document.getElementById("errorCarrito").style.display="block"
+return
 }
 
-})
+if(nombre.value.trim()==""){
+nombre.classList.add("error")
+document.getElementById("errorNombre").style.display="block"
+valido=false
+}
+
+if(direccion.value.trim()==""){
+direccion.classList.add("error")
+document.getElementById("errorDireccion").style.display="block"
+valido=false
+}
+
+if(telefono.value.trim()==""){
+telefono.classList.add("error")
+document.getElementById("errorTelefono").style.display="block"
+valido=false
+}
 
 if(!valido) return
 
@@ -441,31 +414,25 @@ document.getElementById("modalPedido").style.display="none"
 }
 
 function pagar(){
-
 document.getElementById("modalPedido").style.display="none"
 document.getElementById("modalExito").style.display="flex"
-
 }
 
 function mostrarTicket(){
 
 document.getElementById("modalExito").style.display="none"
 
-let fecha=new Date()
-
-let ticket="Pedido<br><br>"
+let ticket="Pedido:<br><br>"
 
 carrito.forEach(p=>{
 ticket+=p.nombre+" - $"+p.precio+"<br>"
 })
 
 ticket+="<br>Total: $"+total
-ticket+="<br><br>Fecha: "+fecha.toLocaleString()
 
 document.getElementById("ticket").innerHTML=ticket
 
 document.getElementById("modalTicket").style.display="flex"
-
 }
 
 function cerrarTicket(){
