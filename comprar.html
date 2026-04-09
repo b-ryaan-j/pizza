@@ -1,10 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-<title>Pizzería</title>
+<title>comprar</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -17,7 +15,6 @@ background:linear-gradient(135deg,#ffb347,#ff5f6d);
 }
 
 /* BANNER */
-
 .banner img{
 width:100%;
 height:clamp(200px,30vw,380px);
@@ -25,15 +22,17 @@ object-fit:cover;
 }
 
 /* TITULOS */
-
 h2{
 text-align:center;
 color:white;
 margin-top:30px;
 }
 
-/* PRODUCTOS */
+.formulario h2{
+color:#c62828;
+}
 
+/* PRODUCTOS */
 .productos{
 display:flex;
 flex-wrap:wrap;
@@ -44,7 +43,7 @@ padding:25px;
 
 .card{
 background:white;
-width:240px;
+width:230px;
 padding:15px;
 border-radius:12px;
 text-align:center;
@@ -58,35 +57,29 @@ transform:scale(1.05);
 
 .card img{
 width:100%;
-height:150px;
+height:140px;
 object-fit:cover;
 border-radius:10px;
 }
 
-.precio{
-color:#c62828;
-font-weight:bold;
-}
-
-.contador{
-font-size:14px;
-color:#555;
-}
-
 /* BOTONES */
-
 button{
 background:linear-gradient(90deg,#ff512f,#dd2476);
-border:none;
 color:white;
+border:none;
 padding:8px 18px;
 border-radius:20px;
 cursor:pointer;
 margin-top:10px;
 }
 
-/* FORMULARIO */
+/* CONTADOR */
+.contador{
+font-size:13px;
+color:#555;
+}
 
+/* FORMULARIO */
 .formulario{
 background:white;
 margin:30px auto;
@@ -104,7 +97,6 @@ border:1px solid #ccc;
 }
 
 /* ERROR */
-
 .error{
 border:2px solid red;
 background:#ffe6e6;
@@ -113,7 +105,7 @@ animation:shake 0.3s;
 
 .mensaje-error{
 color:red;
-font-size:14px;
+font-size:13px;
 display:none;
 }
 
@@ -126,7 +118,6 @@ display:none;
 }
 
 /* MODALES */
-
 .modal{
 position:fixed;
 top:0;
@@ -141,7 +132,7 @@ justify-content:center;
 
 .modal-contenido{
 background:white;
-padding:30px;
+padding:25px;
 border-radius:12px;
 width:320px;
 text-align:center;
@@ -150,6 +141,7 @@ text-align:center;
 .item{
 display:flex;
 justify-content:space-between;
+margin:5px 0;
 }
 
 .total{
@@ -158,19 +150,14 @@ margin-top:10px;
 }
 
 .check{
-font-size:80px;
+font-size:70px;
 color:#4CAF50;
-animation:pop 0.5s ease;
+animation:pop 0.5s;
 }
 
 @keyframes pop{
 0%{transform:scale(0)}
-70%{transform:scale(1.2)}
 100%{transform:scale(1)}
-}
-
-.ticket{
-text-align:left;
 }
 
 footer{
@@ -182,7 +169,6 @@ margin-top:40px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -191,122 +177,152 @@ margin-top:40px;
 <img src="Banner.png">
 </div>
 
+<!-- PIZZAS -->
 <h2>🍕 Pizzas</h2>
-
 <div class="productos">
 
 <div class="card">
 <img src="pizza1.jpg">
 <h3>Pepperoni</h3>
-<p class="precio">$120</p>
-<button onclick="agregar('Pepperoni',120,'pepperoni')">Agregar</button>
-<p id="pepperoni" class="contador">En carrito: 0</p>
+<p>$120</p>
+<button onclick="agregar('Pepperoni',120,'p1')">Agregar</button>
+<p id="p1" class="contador">0</p>
 </div>
 
 <div class="card">
 <img src="pizza2.jpg">
 <h3>Hawaiana</h3>
-<p class="precio">$130</p>
-<button onclick="agregar('Hawaiana',130,'hawaiana')">Agregar</button>
-<p id="hawaiana" class="contador">En carrito: 0</p>
+<p>$130</p>
+<button onclick="agregar('Hawaiana',130,'p2')">Agregar</button>
+<p id="p2" class="contador">0</p>
 </div>
 
 <div class="card">
 <img src="pizza3.jpg">
 <h3>Suprema</h3>
-<p class="precio">$150</p>
-<button onclick="agregar('Suprema',150,'suprema')">Agregar</button>
-<p id="suprema" class="contador">En carrito: 0</p>
+<p>$150</p>
+<button onclick="agregar('Suprema',150,'p3')">Agregar</button>
+<p id="p3" class="contador">0</p>
 </div>
 
 </div>
 
+<!-- REFRESCOS -->
+<h2>🥤 Refrescos</h2>
+<div class="productos">
+
+<div class="card">
+<h3>Coca Cola</h3>
+<p>$25</p>
+<button onclick="agregar('Coca Cola',25,'r1')">Agregar</button>
+<p id="r1" class="contador">0</p>
+</div>
+
+<div class="card">
+<h3>Sprite</h3>
+<p>$25</p>
+<button onclick="agregar('Sprite',25,'r2')">Agregar</button>
+<p id="r2" class="contador">0</p>
+</div>
+
+</div>
+
+<!-- COMPLEMENTOS -->
+<h2>🍟 Complementos</h2>
+<div class="productos">
+
+<div class="card">
+<h3>Papas</h3>
+<p>$40</p>
+<button onclick="agregar('Papas',40,'c1')">Agregar</button>
+<p id="c1" class="contador">0</p>
+</div>
+
+<div class="card">
+<h3>Alitas</h3>
+<p>$80</p>
+<button onclick="agregar('Alitas',80,'c2')">Agregar</button>
+<p id="c2" class="contador">0</p>
+</div>
+
+</div>
+
+<!-- FORMULARIO -->
 <div class="formulario">
-
-<h2>📋 Datos de entrega</h2>
+<h2> Formulario de pedido</h2>
 
 <input id="nombre" placeholder="Nombre">
-<p id="errorNombre" class="mensaje-error">⚠ Este campo es obligatorio</p>
+<p id="e1" class="mensaje-error">Campo obligatorio</p>
 
 <input id="direccion" placeholder="Dirección">
-<p id="errorDireccion" class="mensaje-error">⚠ Este campo es obligatorio</p>
+<p id="e2" class="mensaje-error">Campo obligatorio</p>
 
 <input id="telefono" placeholder="Teléfono">
-<p id="errorTelefono" class="mensaje-error">⚠ Este campo es obligatorio</p>
+<p id="e3" class="mensaje-error">Campo obligatorio</p>
 
 </div>
 
-<div style="text-align:center;margin:30px;">
+<div style="text-align:center;margin:20px;">
 <button onclick="abrirCarrito()">🛒 Ver carrito</button>
 </div>
 
 <!-- MODAL CARRITO -->
-
-<div class="modal" id="modalCarrito">
+<div class="modal" id="carrito">
 <div class="modal-contenido">
 
-<h3>Tu carrito</h3>
-
+<h3>Carrito</h3>
 <div id="lista"></div>
 
 <p class="total">Total: $<span id="total">0</span></p>
 
-<p id="errorCarrito" class="mensaje-error">⚠ Agrega productos al carrito</p>
+<p id="errorCarrito" class="mensaje-error">Agrega productos</p>
 
-<button onclick="abrirPedido()">Confirmar pedido</button>
-<button onclick="cerrarCarrito()">Cerrar</button>
+<button onclick="abrirPedido()">Confirmar</button>
+<button onclick="cerrar('carrito')">Cerrar</button>
 
 </div>
 </div>
 
-<!-- MODAL RESUMEN -->
-
-<div class="modal" id="modalPedido">
+<!-- RESUMEN -->
+<div class="modal" id="pedido">
 <div class="modal-contenido">
 
-<h3>Resumen del pedido</h3>
-
+<h3>Resumen</h3>
 <div id="resumen"></div>
 
-<p>Total: $<span id="total2">0</span></p>
+<p>Total: $<span id="total2"></span></p>
 
 <button onclick="pagar()">Pagar</button>
-<button onclick="cerrarPedido()">Cancelar</button>
 
 </div>
 </div>
 
-<!-- MODAL EXITO -->
-
-<div class="modal" id="modalExito">
+<!-- EXITO -->
+<div class="modal" id="exito">
 <div class="modal-contenido">
 
 <div class="check">✔</div>
+<h2>Pago realizado</h2>
 
-<h2>¡Pago realizado!</h2>
-
-<button onclick="mostrarTicket()">Ver ticket</button>
+<button onclick="ticket()">Ver ticket</button>
 
 </div>
 </div>
 
-<!-- MODAL TICKET -->
-
-<div class="modal" id="modalTicket">
+<!-- TICKET -->
+<div class="modal" id="ticket">
 <div class="modal-contenido">
 
 <h3>Ticket</h3>
+<div id="ticketContenido"></div>
 
-<div id="ticket"></div>
-
-<button onclick="cerrarTicket()">Cerrar</button>
+<button onclick="cerrar('ticket')">Cerrar</button>
 
 </div>
 </div>
 
 <footer>
-© 2026 Pizzería  
-Desarrollado por Rodrigo Andrade
+© 2026 Pizzería | Desarrollado por Rodrigo Andrade
 </footer>
 
 <script>
@@ -316,41 +332,37 @@ let total=0
 let contadores={}
 
 function agregar(nombre,precio,id){
-
 carrito.push({nombre,precio})
 total+=precio
 
 if(!contadores[id]) contadores[id]=0
 contadores[id]++
 
-document.getElementById(id).innerText="En carrito: "+contadores[id]
-
+document.getElementById(id).innerText=contadores[id]
 }
 
 function abrirCarrito(){
 actualizar()
-document.getElementById("modalCarrito").style.display="flex"
+document.getElementById("carrito").style.display="flex"
 }
 
-function cerrarCarrito(){
-document.getElementById("modalCarrito").style.display="none"
+function cerrar(id){
+document.getElementById(id).style.display="none"
 }
 
 function actualizar(){
-
 let lista=document.getElementById("lista")
 lista.innerHTML=""
 
-carrito.forEach((item,i)=>{
+carrito.forEach((p,i)=>{
 lista.innerHTML+=`
 <div class="item">
-${item.nombre} - $${item.precio}
+${p.nombre} - $${p.precio}
 <button onclick="eliminar(${i})">❌</button>
 </div>`
 })
 
 document.getElementById("total").innerText=total
-
 }
 
 function eliminar(i){
@@ -361,82 +373,52 @@ actualizar()
 
 function abrirPedido(){
 
-let nombre=document.getElementById("nombre")
-let direccion=document.getElementById("direccion")
-let telefono=document.getElementById("telefono")
+let n=document.getElementById("nombre")
+let d=document.getElementById("direccion")
+let t=document.getElementById("telefono")
 
-let valido=true
+let ok=true
 
-// limpiar errores
 document.querySelectorAll(".mensaje-error").forEach(e=>e.style.display="none")
 
-if(carrito.length===0){
+if(carrito.length==0){
 document.getElementById("errorCarrito").style.display="block"
 return
 }
 
-if(nombre.value.trim()==""){
-nombre.classList.add("error")
-document.getElementById("errorNombre").style.display="block"
-valido=false
-}
+if(n.value==""){n.classList.add("error");e1.style.display="block";ok=false}
+if(d.value==""){d.classList.add("error");e2.style.display="block";ok=false}
+if(t.value==""){t.classList.add("error");e3.style.display="block";ok=false}
 
-if(direccion.value.trim()==""){
-direccion.classList.add("error")
-document.getElementById("errorDireccion").style.display="block"
-valido=false
-}
+if(!ok) return
 
-if(telefono.value.trim()==""){
-telefono.classList.add("error")
-document.getElementById("errorTelefono").style.display="block"
-valido=false
-}
+let r=""
+carrito.forEach(p=>r+=p.nombre+" - $"+p.precio+"<br>")
 
-if(!valido) return
-
-let resumen=""
-
-carrito.forEach(p=>{
-resumen+=p.nombre+" - $"+p.precio+"<br>"
-})
-
-document.getElementById("resumen").innerHTML=resumen
+document.getElementById("resumen").innerHTML=r
 document.getElementById("total2").innerText=total
 
-document.getElementById("modalCarrito").style.display="none"
-document.getElementById("modalPedido").style.display="flex"
+cerrar("carrito")
+document.getElementById("pedido").style.display="flex"
 
-}
-
-function cerrarPedido(){
-document.getElementById("modalPedido").style.display="none"
 }
 
 function pagar(){
-document.getElementById("modalPedido").style.display="none"
-document.getElementById("modalExito").style.display="flex"
+cerrar("pedido")
+document.getElementById("exito").style.display="flex"
 }
 
-function mostrarTicket(){
+function ticket(){
 
-document.getElementById("modalExito").style.display="none"
+cerrar("exito")
 
-let ticket="Pedido:<br><br>"
+let txt="Pedido:<br><br>"
+carrito.forEach(p=>txt+=p.nombre+" - $"+p.precio+"<br>")
+txt+="<br>Total: $"+total
 
-carrito.forEach(p=>{
-ticket+=p.nombre+" - $"+p.precio+"<br>"
-})
+document.getElementById("ticketContenido").innerHTML=txt
 
-ticket+="<br>Total: $"+total
-
-document.getElementById("ticket").innerHTML=ticket
-
-document.getElementById("modalTicket").style.display="flex"
-}
-
-function cerrarTicket(){
-document.getElementById("modalTicket").style.display="none"
+document.getElementById("ticket").style.display="flex"
 }
 
 </script>
