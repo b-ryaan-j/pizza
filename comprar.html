@@ -215,7 +215,29 @@ text-align:center;
 padding:20px;
 margin-top:40px;
 }
+html, body{
+height:100%;
+margin:0;
+}
 
+body{
+display:flex;
+flex-direction:column;
+min-height:100vh;
+}
+
+.contenedor{
+flex:1;
+}
+
+footer{
+width:100%;
+background:#8e0e00;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:auto; /* 🔥 ESTA ES LA CLAVE */
+}
 </style>
 </head>
 
