@@ -7,7 +7,55 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+.contenedor{
+display:flex;
+padding:20px;
+gap:20px;
+}
 
+.menu{
+width:220px;
+background:linear-gradient(#ffffff,#ffe0e0);
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+position:sticky;
+top:20px;
+height:fit-content;
+}
+
+.menu h3{
+text-align:center;
+}
+
+.menu ul{
+list-style:none;
+padding:0;
+}
+
+.menu li{
+background:#ff4d4d;
+margin:10px 0;
+border-radius:8px;
+transition:0.3s;
+}
+
+.menu a{
+display:block;
+padding:12px;
+color:white;
+text-decoration:none;
+text-align:center;
+}
+
+.menu li:hover{
+background:#ff0000;
+transform:scale(1.05);
+}
+
+.contenido{
+flex:1;
+}
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
@@ -172,7 +220,20 @@ margin-top:40px;
 </head>
 
 <body>
+<div class="contenedor">
 
+<div class="menu">
+<h3>Menú</h3>
+<ul>
+<li><a href="index.html">🏠 Inicio</a></li>
+<li><a href="pizzas.html">🍕 Pizzas</a></li>
+<li><a href="promociones.html">🔥 Promociones</a></li>
+<li><a href="contacto.html">📞 Contacto</a></li>
+</ul>
+</div>
+
+<div class="contenido">
+    
 <div class="banner">
 <img src="Banner.png">
 </div>
@@ -422,7 +483,8 @@ document.getElementById("ticket").style.display="flex"
 }
 
 </script>
-
+</div> <!-- contenido -->
+</div> <!-- contenedor -->
 </body>
 </html>
 ```
