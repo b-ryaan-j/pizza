@@ -230,8 +230,19 @@ font-size:14px;
 flex-direction:column;
 }
 
-.menu{
-width:100%;
+.menu a{
+text-decoration:none;
+color:white;
+display:block;
+}
+
+.menu li{
+padding:0; /* 🔥 importante */
+}
+
+.menu li a{
+padding:12px;
+display:block;
 }
 
 .galeria{
@@ -270,10 +281,10 @@ width:80%;
 <h3>Menú</h3>
 
 <ul>
-<li>🏠 Inicio</li>
-<li>🍕 Pizzas</li>
-<li>🔥 Promociones</li>
-<li>📞 Contacto</li>
+<li><a href="index.html">🏠 Inicio</a></li>
+<li><a href="pizzas.html">🍕 Pizzas</a></li>
+<li><a href="promociones.html">🔥 Promociones</a></li>
+<li><a href="contacto.html">📞 Contacto</a></li>
 </ul>
 
 </div>
